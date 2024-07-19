@@ -6,12 +6,14 @@ body > h1 {
     text-align: center;
     font-size: 2rem;
     margin: 0;
-    padding: 20px; 
+    color: aliceblue;
+    padding: 20px;
 }
 
-h1,h2,h3,ul,ol,a,p {
+h2,h3,ul,ol,a,p {
     color: aliceblue;
-    font-size: 20px;
+    font-size: 18px;
+    font-family: 'Courier New', Courier, monospace;
 }
 
 .intro_box p {
@@ -23,18 +25,37 @@ h1,h2,h3,ul,ol,a,p {
     background-color: rgb(80, 56, 94);
     padding: 20px;
     border: solid rgb(189, 129, 224);
-    margin: 10px auto;
-    border-width: 2px;
+    margin: 12px auto;
+    border-width: 1px;
     border-radius: 10px;
 }
+.intro_box p {
+    font-size: 20px;
+}
 
+.circle {
+    top: 20px;
+    border-radius: 50%;
+    overflow: hidden; 
+    /* This line hides the overflowing content inside the div */
+    height: 200px;
+    width: 200px;
+    margin: 0 auto;
+}
 
 .circle img {
     margin: 0;
     padding: 0;
-    height: 200px;
-    width: 200px;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
 }
 
+.image {
+    height: 20px;
+    width: 20px;
+    margin: 0;
+    padding: 0;
+}
 
 
