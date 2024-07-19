@@ -12,33 +12,19 @@ h1,h2,h3,ul,ol,a,p {
     font-size: 20px;
 }
 
-.intro_box {
-    background-color: rgb(80, 56, 94);
-    padding: 20px;
-    border: solid rgb(189, 129, 224);
-    margin: 10px;
-    border-radius: 10px;
-
-}
-
 .intro_box p {
     font-size: 20px;
 }
 
-.skill_box {
+.box {
     background-color: rgb(80, 56, 94);
     padding: 20px;
     border: solid rgb(189, 129, 224);
     margin: 10px;
+    border-width: 2px;
     border-radius: 10px;
 }
 
-.links_box {
-    background-color: rgb(80, 56, 94);
-    padding: 20px;
-    border: solid rgb(189, 129, 224);
-    margin: 10px;
-    border-radius: 10px;
-}
+
 
 
