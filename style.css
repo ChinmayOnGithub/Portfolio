@@ -1,5 +1,8 @@
 body {
     background-color: rgb(42, 5, 63);
+    background-image: url("/Portfolio/assets/images/bg_image.jpg");
+    background-repeat: no-repeat;
+    background-size:cover;
 }
 
 body > h1 {
@@ -40,7 +43,7 @@ h2,h3,ul,ol,a,p {
     /* This line hides the overflowing content inside the div */
     height: 200px;
     width: 200px;
-    margin: 0 auto;
+    margin: 20px auto;
 }
 
 .circle img {
@@ -51,7 +54,7 @@ h2,h3,ul,ol,a,p {
     object-fit: cover;
 }
 
-.image {
+.image_logo {
     height: 20px;
     width: 20px;
     margin: 0;
