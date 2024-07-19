@@ -5,6 +5,8 @@ body {
 body > h1 {
     text-align: center;
     font-size: 2rem;
+    margin: 0;
+    padding: 20px; 
 }
 
 h1,h2,h3,ul,ol,a,p {
@@ -26,6 +28,13 @@ h1,h2,h3,ul,ol,a,p {
     border-radius: 10px;
 }
 
+
+.circle img {
+    margin: 0;
+    padding: 0;
+    height: 200px;
+    width: 200px;
+}
 
 
 
