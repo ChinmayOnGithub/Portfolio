@@ -2,10 +2,10 @@ body {
     /* background-color: rgb(42, 5, 63); */
     background-image: url("/Portfolio/assets/images/bg_image.jpg");
     background-repeat: no-repeat;
-    background-size:cover;
+    background-size: cover;
 }
 
-body > h1 {
+h1 {
     text-align: center;
     font-size: 2rem;
     margin: 0;
@@ -13,7 +13,7 @@ body > h1 {
     padding: 20px;
 }
 
-h2,h3,ul,ol,a,p {
+h2, h3, ul, ol, a, p {
     color: aliceblue;
     font-size: 18px;
     font-family: 'Courier New', Courier, monospace;
@@ -27,20 +27,15 @@ h2,h3,ul,ol,a,p {
     width: 500px;
     background-color: rgb(80, 56, 94);
     padding: 20px;
-    border: solid rgb(189, 129, 224);
+    border: 1px solid rgb(189, 129, 224);
     margin: 12px auto;
-    border-width: 1px;
     border-radius: 10px;
-}
-.intro_box p {
-    font-size: 20px;
 }
 
 .circle {
     top: 20px;
     border-radius: 50%;
-    overflow: hidden; 
-    /* This line hides the overflowing content inside the div */
+    overflow: hidden;
     height: 200px;
     width: 200px;
     margin: 30px auto;
@@ -54,11 +49,8 @@ h2,h3,ul,ol,a,p {
     object-fit: cover;
 }
 
-.image_logo {
-    height: 20px;
-    width: 20px;
-    margin: 0;
-    padding: 0;
+a {
+    /* this is just temperory until i learn the actual way */
+    margin-right: 15px;
 }
-
 
