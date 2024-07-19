@@ -1,10 +1,44 @@
+body {
+    background-color: rgb(42, 5, 63);
+}
+
+body > h1 {
+    text-align: center;
+    font-size: 2rem;
+}
+
+h1,h2,h3,ul,ol,a,p {
+    color: aliceblue;
+    font-size: 20px;
+}
+
 .intro_box {
-    background-color: bisque;
-    padding: 25px;
-    border: solid rgb(170, 147, 98);
+    background-color: rgb(80, 56, 94);
+    padding: 20px;
+    border: solid rgb(189, 129, 224);
+    margin: 10px;
     border-radius: 10px;
+
 }
 
 .intro_box p {
     font-size: 20px;
 }
+
+.skill_box {
+    background-color: rgb(80, 56, 94);
+    padding: 20px;
+    border: solid rgb(189, 129, 224);
+    margin: 10px;
+    border-radius: 10px;
+}
+
+.links_box {
+    background-color: rgb(80, 56, 94);
+    padding: 20px;
+    border: solid rgb(189, 129, 224);
+    margin: 10px;
+    border-radius: 10px;
+}
+
+
