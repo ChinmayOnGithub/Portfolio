@@ -43,7 +43,7 @@ h2,h3,ul,ol,a,p {
     /* This line hides the overflowing content inside the div */
     height: 200px;
     width: 200px;
-    margin: 20px auto;
+    margin: 30px auto;
 }
 
 .circle img {
