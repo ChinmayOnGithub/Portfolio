@@ -1,0 +1,10 @@
+.intro_box {
+    background-color: bisque;
+    padding: 25px;
+    border: solid rgb(170, 147, 98);
+    border-radius: 10px;
+}
+
+.intro_box p {
+    font-size: 20px;
+}
