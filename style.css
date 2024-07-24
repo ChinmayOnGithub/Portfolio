@@ -1,6 +1,6 @@
 body {
     /* background-color: rgb(42, 5, 63); */
-    background-image: url("/Portfolio/assets/images/bg_image.jpg");
+    background-image: url("assets/images/bg_image.jpg");
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -25,9 +25,9 @@ h2, h3, ul, ol, a, p {
 
 .box {
     width: 500px;
-    background-color: rgb(80, 56, 94);
+    background-color: #332851;
     padding: 20px;
-    border: 1px solid rgb(189, 129, 224);
+    border: 1px solid rgb(179, 132, 206);
     margin: 12px auto;
     border-radius: 10px;
 }
@@ -38,7 +38,8 @@ h2, h3, ul, ol, a, p {
     overflow: hidden;
     height: 200px;
     width: 200px;
-    margin: 30px auto;
+    margin: 15px 15px;
+    float: right;
 }
 
 .circle img {
@@ -49,8 +50,25 @@ h2, h3, ul, ol, a, p {
     object-fit: cover;
 }
 
-a {
-    /* this is just temperory until i learn the actual way */
-    margin-right: 15px;
+
+.link-box {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 20px 0;
+}
+.link-box * {
+    
+    font-size: 12px;
 }
 
+.image-logo {
+    margin-right: 8px;
+}
+.btn-custom {
+    margin: 5px;
+    display: inline-flex;
+    align-items: center;
+}
