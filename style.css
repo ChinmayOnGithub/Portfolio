@@ -1,8 +1,20 @@
 body {
-    /* background-color: rgb(42, 5, 63); */
-    background-image: url("assets/images/bg_image.jpg");
-    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    height: 100vh;
+    background-color: rgb(16, 2, 24);
+    /* background-image: url("assets/images/bg_image.jpg"); */
     background-size: cover;
+    /* background-repeat: no-repeat; */
+}
+
+#construction {
+    text-align: center;
+    font-size: 2rem;
+    margin: 0;
+    color: aliceblue;
+    padding: 25px;   
+    font-family: 'Courier New', Courier, monospace; 
 }
 
 h1 {
@@ -24,7 +36,8 @@ h2, h3, ul, ol, a, p {
 }
 
 .box {
-    width: 500px;
+    width: auto;
+    height: fit-content;
     background-color: #332851;
     padding: 20px;
     border: 1px solid rgb(179, 132, 206);
