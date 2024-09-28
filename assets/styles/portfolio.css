@@ -1,0 +1,91 @@
+/* General Styles */
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    background: rgb(16, 2, 24) url("../images/bg_image.jpg") no-repeat center/cover;
+    color: #ebebeb;
+    font-family: 'Courier New', monospace;
+}
+
+h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin: 20px 0;
+}
+
+h2 {
+    font-size: 2rem;
+    color: aliceblue;
+    margin: 15px 0;
+}
+
+/* Text Styles */
+p, ul, ol {
+    font-size: 18px;
+    color: aliceblue;
+    margin: 10px 0;
+}
+
+a {
+    color: #f0a500;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Box Styles */
+.box {
+    width: 90%;
+    max-width: 600px;
+    background: rgba(51, 40, 81, 0.8);
+    padding: 20px;
+    border: 1px solid rgb(179, 132, 206);
+    margin: 20px auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Circle Image */
+.circle {
+    border-radius: 50%;
+    overflow: hidden;
+    height: 200px;
+    width: 200px;
+    margin: 15px;
+}
+
+.circle img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+/* Skills List */
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+/* Link Box */
+.link-box {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.image-logo {
+    height: 20px;
+    width: 20px;
+}
+
+.btn-custom {
+    margin: 5px;
+    display: inline-flex;
+    align-items: center;
+}
