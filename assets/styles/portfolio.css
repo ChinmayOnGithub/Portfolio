@@ -89,3 +89,17 @@ ul {
     display: inline-flex;
     align-items: center;
 }
+
+.horizontal-div {
+    display: flex;
+
+}
+
+.horizontal-div-item {
+    width: 500px;
+    background-color: #332851;
+    padding: 20px;
+    border: 1px solid rgb(179, 132, 206);
+    margin: 16px;
+    border-radius: 10px;
+}
