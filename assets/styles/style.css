@@ -1,34 +1,28 @@
 body {
     display: flex;
+    justify-content: center;
     align-items: center;
     height: 100vh;
     background-color: rgb(16, 2, 24);
+    color: rgb(235, 235, 235);
+    text-align: center;
+    font-size: 12px;
+    padding: 0 10px; /* Ensures responsiveness */
     /* background-image: url("assets/images/bg_image.jpg"); */
     background-size: cover;
     /* background-repeat: no-repeat; */
 }
 
-#construction {
-    text-align: center;
-    font-size: 2rem;
-    margin: 0;
-    color: aliceblue;
-    padding: 25px;   
-    font-family: 'Courier New', Courier, monospace; 
-}
-
-h1 {
-    text-align: center;
-    font-size: 2rem;
-    margin: 0;
-    color: aliceblue;
-    padding: 20px;
-}
-
-h2, h3, ul, ol, a, p {
-    color: aliceblue;
+h1, h2, h3, ul, ol, a, p {
+    color: rgb(241, 241, 241);
     font-size: 18px;
-    font-family: 'Courier New', Courier, monospace;
+    /* font-family: 'Courier New', Courier, monospace; */
+}
+
+h1, h2 {
+    font-size: 2rem;
+    text-align: center;
+    margin: 20px 0;
 }
 
 .intro_box p {
@@ -36,13 +30,17 @@ h2, h3, ul, ol, a, p {
 }
 
 .box {
-    width: auto;
-    height: fit-content;
-    background-color: #332851;
-    padding: 20px;
+    background-color: rgba(51, 40, 81, 0.8);
+    padding: 30px;
     border: 1px solid rgb(179, 132, 206);
-    margin: 12px auto;
     border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: auto;
+    max-width: 800px;
+    height: fit-content;
+    margin: 12px auto;
+    opacity: 0;
+    animation: fadeIn 2s ease-in forwards;
 }
 
 .circle {
@@ -63,7 +61,6 @@ h2, h3, ul, ol, a, p {
     object-fit: cover;
 }
 
-
 .link-box {
     display: flex;
     gap: 24px;
@@ -72,16 +69,61 @@ h2, h3, ul, ol, a, p {
     text-align: center;
     margin: 20px 0;
 }
+
 .link-box * {
-    
     font-size: 12px;
+}
+
+.btn-custom {
+    margin: 5px;
+    display: inline-flex;
+    align-items: center;
 }
 
 .image-logo {
     margin-right: 8px;
 }
-.btn-custom {
-    margin: 5px;
-    display: inline-flex;
-    align-items: center;
+
+/* Typing effect */
+.typing {
+    font-size: 1.2rem;
+    white-space: normal;
+    overflow: hidden;
+    word-break: break-word;
+}
+
+/* Fade-in effect for the whole box */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Media query for small screens */
+@media (max-width: 600px) {
+    h1, h2 {
+        font-size: 1.5rem;
+    }
+
+    .typing {
+        font-size: 1rem;
+    }
+
+    .corner-gif {
+        width: 100px; /* Make GIF smaller on mobile */
+    }
+}
+
+/* GIF positioned at the bottom-right corner */
+.corner-gif {
+    margin: 40px;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    width: 200px; /* Adjust GIF size */
+    height: auto;
+    z-index: 1000;
 }
