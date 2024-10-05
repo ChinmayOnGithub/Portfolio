@@ -56,6 +56,7 @@ a:hover {
     height: 200px;
     width: 200px;
     margin: 15px;
+    float: left;
 }
 
 .circle img {
@@ -97,6 +98,7 @@ ul {
 
 .horizontal-div-item {
     width: 500px;
+    height: 100px;
     background-color: #332851;
     padding: 20px;
     border: 1px solid rgb(179, 132, 206);
