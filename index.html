@@ -12,39 +12,41 @@
   
 </head>
 
-<body>
-  
-  <div class="box">
-    <h2 class="title" id="construction">⚠️ Under Construction...</h2>
-    <p class="typing" id="typewriter-text"></p>
-  </div>
+  <body>
 
-  <!-- Add your GIF below -->
-  <a class="corner-gif" href="https://www.animatedimages.org/cat-under-construction-695.htm"><img
-      src="https://www.animatedimages.org/data/media/695/animated-under-construction-image-0050.gif" border="0"
-      alt="animated-under-construction-image-0050" /></a>
+    
+    <div class="box">
+      <h2 class="title" id="construction">⚠️ Under Construction...</h2>
+      <p class="typing" id="typewriter-text"></p>
+    </div>
 
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script>
-    // Typing text for the paragraph
-    const message =
-      "We're working hard to get things up and running. Please check back soon!";
-    let index = 0;
+    <!-- Add your GIF below -->
+    <a class="corner-gif" href="https://www.animatedimages.org/cat-under-construction-695.htm"><img
+        src="https://www.animatedimages.org/data/media/695/animated-under-construction-image-0050.gif" border="0"
+        alt="animated-under-construction-image-0050" /></a>
 
-    function typeText() {
-      if (index < message.length) {
-        document.getElementById("typewriter-text").innerHTML +=
-          message.charAt(index);
-        index++;
-        setTimeout(typeText, 50); // Adjust typing speed here
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      // Typing text for the paragraph
+      const message =
+        "We're working hard to get things up and running. Please check back soon!";
+      let index = 0;
+
+      function typeText() {
+        if (index < message.length) {
+          document.getElementById("typewriter-text").innerHTML +=
+            message.charAt(index);
+          index++;
+          setTimeout(typeText, 50); // Adjust typing speed here
+        }
       }
-    }
+      
 
-    // Trigger the typing animation once the page loads
-    window.onload = function () {
-      setTimeout(typeText, 1000); // Delay before typing starts
-    };
-  </script>
-</body>
+      // Trigger the typing animation once the page loads
+      window.onload = function () {
+        setTimeout(typeText, 1000); // Delay before typing starts
+      };
+    </script>
+  </body>
 
 </html>
