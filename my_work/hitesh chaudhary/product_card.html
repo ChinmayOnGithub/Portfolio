@@ -7,40 +7,135 @@
     <title>Product</title>
 
     <style>
-        body {
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        body {
             background-color: #1a1a1a;
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             font-family: Arial, Helvetica, sans-serif;
+            font-size: 16px;
         }
 
         .container {
             background-color: aliceblue;
-            padding: 24px;
             min-width: 200px;
-            border-radius: 8px;
+            max-width: 300px;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.1s ease;
+            outline: none;
+            box-shadow: none;
+        }
+
+        #banner {
+            object-fit: cover;
+            width: 100%;
+            height: auto;
+        }
+
+        .content {
+            margin: 20px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 50px);
+            row-gap: 2px;
 
         }
 
-        h1 {}
+        .content h1 {
+            font-size: 1.8rem;
+            grid-column: 1/4;
+        }
+
+        .content p {
+            font-size: 1.2rem;
+            color: #666;
+            grid-column: 1/4;
+            grid-row: 2/3;
+        }
+
+
+        .prize {
+            grid-column: 1/2;
+            grid-row: 3/4;
+            width: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background-color: #f79d00;
+            border-radius: 16px;
+            transition: background-color 0.2s ease-in-out, color 0.2s ease;
+        }
+
+        .prize h3 {
+            font-size: 1.25rem;
+            margin: 0;
+            color: white;
+
+
+        }
+
+        .logo-container {
+            height: 60px;
+            width: 60px;
+            padding: 5px;
+            border-radius: 50%;
+            grid-column: 3/4;
+            grid-row: 3/4;
+            justify-self: flex-end;
+            align-self: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.1s ease-in;
+        }
+
+
+        #cart-logo {
+            width: 50px;
+
+            padding: 10px;
+            object-fit: fill;
+        }
+
+        .prize:hover {
+            background-color: #f75200;
+        }
+
+        .container:hover {
+            /* transform: scale(1.01); */
+            box-shadow: 4px 12px 60px rgba(155, 155, 155, 0.15);
+
+
+        }
+
+        .logo-container:hover {
+            background-color: antiquewhite;
+        }
     </style>
 </head>
 
 <body>
     <div class="container">
+        <img id="banner" src="./watch.jpg" alt="mens watch">
         <div class="content">
             <h1>Men's Wear</h1>
-            <img id="banner" src="#" alt="mens watch">
-            <p id="title">Beautiful wear</p>
+            <p id="title">Handsome wear</p>
             <div class="prize">
                 <h3>$4000/-</h3>
             </div>
-            <img id="cart-logo" src="#" alt="add to cart">
+            <div class="logo-container">
+                <img id="cart-logo" src="./cart.svg" alt="add to cart">
+
+            </div>
         </div>
     </div>
 </body>
