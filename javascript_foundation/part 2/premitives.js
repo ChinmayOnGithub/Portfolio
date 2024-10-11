@@ -33,7 +33,12 @@ let paragraph = `my name is ${username} ${lastname}.` // using those variables i
 console.log(paragraph);
 
 
+// Symbols
 
+let sm1 = Symbol("chinmay")
+let sm2 = Symbol("chinmay")
+
+console.log(sm1 == sm2);
 
 
 
