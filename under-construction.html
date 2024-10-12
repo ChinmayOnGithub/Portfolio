@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Under Construction</title>
+  <link rel="shortcut icon" href="./assets/images/giphy.webp">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+  <link rel="stylesheet" href="./assets/styles/style.css">
+  
+</head>
+
+  <body>
+
+    
+    <div class="box">
+      <h2 class="title" id="construction">⚠️ Under Construction...</h2>
+      <p class="typing" id="typewriter-text"></p>
+    </div>
+
+    <!-- Add your GIF below -->
+    <a class="corner-gif" href="https://www.animatedimages.org/cat-under-construction-695.htm"><img
+        src="https://www.animatedimages.org/data/media/695/animated-under-construction-image-0050.gif" border="0"
+        alt="animated-under-construction-image-0050" /></a>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      // Typing text for the paragraph
+      const message =
+        "We're working hard to get things up and running. Please check back soon!";
+      let index = 0;
+
+      function typeText() {
+        if (index < message.length) {
+          document.getElementById("typewriter-text").innerHTML +=
+            message.charAt(index);
+          index++;
+          setTimeout(typeText, 50); // Adjust typing speed here
+        }
+      }
+      
+
+      // Trigger the typing animation once the page loads
+      window.onload = function () {
+        setTimeout(typeText, 1000); // Delay before typing starts
+      };
+    </script>
+  </body>
+
+</html>
