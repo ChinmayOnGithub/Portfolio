@@ -2,6 +2,9 @@ let username = {
     firstname: "Chinmay",
     "last name": "Patil"
 };
+// The code defines an object `username` with properties `firstname` and `last name`.
+// Objects in JavaScript are collections of key-value pairs.
+// The properties can be accessed using dot notation or bracket notation.
 
 // console.log(username.firstname);
 // console.log(username['last name']);

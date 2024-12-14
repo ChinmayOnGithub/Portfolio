@@ -1,12 +1,24 @@
+:root {
+    --accentColor: #35253555;
+    --background: #100218;
+}
+
 /* General Styles */
 body {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: center;
     min-height: 100vh;
-    background: rgb(16, 2, 24) url("../images/bg_image.jpg") no-repeat center/cover;
+    background: var(--background) url("../images/bg_image.jpg") no-repeat center/cover;
     color: #ebebeb;
     font-family: 'Courier New', monospace;
+}
+
+.context {
+    display: flex;
+    background-color: var(--accentColor);
+    flex-direction: column;
+    /* width: 50%; */
+    justify-content: center;
 }
 
 h1 {
@@ -41,7 +53,7 @@ a:hover {
 .box {
     width: 90%;
     max-width: 600px;
-    background: rgba(51, 40, 81, 0.8);
+    /* background: rgba(51, 40, 81, 0.8); */
     padding: 20px;
     border: 1px solid rgb(179, 132, 206);
     margin: 20px auto;

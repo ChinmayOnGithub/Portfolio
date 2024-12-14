@@ -1,3 +1,24 @@
+
+
+/**
+ * This script demonstrates various JavaScript concepts including conditionals, array manipulation, 
+ * and creating both soft and hard copies of arrays. It also shows how to merge arrays.
+ * 
+ * Concepts covered:
+ * - Conditional statements
+ * - Array manipulation (accessing elements, creating copies, merging)
+ * - Spread operator and slice method for copying arrays
+ * 
+ * @constant {boolean} isTrue - A boolean variable set to true.
+ * @constant {Array<string>} teaFlavours - An array containing different types of tea.
+ * @constant {string} firstTea - The first element of the teaFlavours array.
+ * @constant {Array<string>} softCopyTeaFlavours - A soft copy of the teaFlavours array (same reference).
+ * @constant {Array<string>} hardCopy - A hard copy of the teaFlavours array using the spread operator.
+ * @constant {Array<string>} hardCopy2 - A hard copy of the teaFlavours array using the slice method.
+ * @constant {Array<string>} merged - An array resulting from merging hardCopy and hardCopy2 arrays.
+ */
+
+
 let isTrue = true
 
 if (isTrue) {

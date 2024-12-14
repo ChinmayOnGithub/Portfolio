@@ -1,42 +1,47 @@
+/**
+ * Demonstrates the usage of primitive data types in JavaScript.
+ * 
+ * Primitive data types covered:
+ * - Numbers
+ * - Booleans
+ * - Null & Undefined
+ * - Strings
+ * - Symbols
+ * 
+ * Examples include:
+ * - Creating and using numbers
+ * - Creating and using booleans
+ * - Handling null and undefined values
+ * - Creating and using strings with concatenation and interpolation
+ * - Creating and comparing symbols
+ */
+
 // Numbers
-let balance = 120
-let anotherNumber = new Number(120)
-
-// console.log(balance);
-// console.log(anotherNumber);
-// console.log(anotherNumber.valueOf());
-
-// in js everything is Object
-
-
-// console.log(typeof (anotherNumber));
-// console.log(typeof (balance));
+let balance = 120; // A primitive number
+let anotherNumber = new Number(120); // A number object (not recommended for general use)
 
 // Boolean
-let isActive = false;
-// let isActive2 = new Boolean(false); // not recommended
+let isActive = false; // A primitive boolean
+// let isActive2 = new Boolean(false); // A boolean object (not recommended)
 
-// null & undefined
-let firstname;
-// console.log(firstname);
+// Null & Undefined
+let firstname; // Declared but not initialized, hence undefined
 
-// strings
+// Strings
+let username = "chinmay"; // A string using double quotes
+let lastname = 'patil'; // A string using single quotes
+let para = username + " " + lastname; // String concatenation
+console.log(username); // Logs "chinmay"
+console.log(lastname); // Logs "patil"
+console.log(para); // Logs "chinmay patil"
 
-let username = "chinmay"
-let lastname = 'patil'
-let para = username + " " + lastname
-console.log(username);
-console.log(lastname);
-console.log(para);
-
-let paragraph = `my name is ${username} ${lastname}.` // using those variables in there is called {String Interpolation}.
-console.log(paragraph);
-
+let paragraph = `my name is ${username} ${lastname}.`; // String interpolation
+console.log(paragraph); // Logs "my name is chinmay patil."
 
 // Symbols
-
-let sm1 = Symbol("chinmay")
-let sm2 = Symbol("chinmay")
+let sm1 = Symbol("chinmay"); // A symbol with description "chinmay"
+let sm2 = Symbol("chinmay"); // Another symbol with the same description
+console.log(sm1 == sm2); // Logs false, as symbols are unique
 
 console.log(sm1 == sm2);
 
