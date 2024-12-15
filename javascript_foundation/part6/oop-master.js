@@ -62,7 +62,7 @@ let myCar = new Car("Tata", "Safari");
 
 // ====================== Encapsulation ==========================
 
-// Restricts direct access to the class-objects data
+// Restricts direct access to the class-objects data (using # symbol so that no one outside the class can access the var)
 // Can not use it outside the class
 // Only using some specified methods
 class BankAccount {
@@ -109,7 +109,74 @@ class CoffeeMaker {
 }
 
 let myMachine = new CoffeeMaker();
-console.log(
-    myMachine.pressStartButton()
-);
+// console.log(myMachine.pressStartButton());
 
+// ========= Polymorphism ====================
+
+class Bird {
+    fly() {
+        return `Fying...`;
+    }
+}
+
+class Penguine extends Bird {
+    fly() {
+        return `Penquines can't fly.`;
+    }
+}
+
+let sparrow = new Bird();
+let penguine = new Penguine();
+
+// console.log(sparrow.fly());
+// console.log(penguine.fly());
+
+
+// ============== static method ===========
+/* 
+only class itself can use that method directly and not through any object
+
+static can be : variable, method... anything inside the class
+*/
+
+class Meri {
+    static start(a, b) {
+        return a + b
+    }
+}
+
+let my = new Meri()
+// console.log(my.start(1, 5)); // won't work
+// console.log(Meri.start(1, 5));
+
+
+// =================== Getters and Setters ==========================
+
+class Employee {
+    #salary;
+
+    constructor(name, salary) {
+        if (salary < 0) {
+            throw new Error("Salary can not be negative");
+
+        }
+        this.name = name
+        this.#salary = salary
+    }
+
+    get salary() {
+        return `You are not allowed to see this. ${this.#salary}`;
+    }
+
+    set salary(value) {
+        if (value < 0) {
+            console.error(`Invalid amount.`);
+        }
+        else {
+            this.#salary = value;
+        }
+    }
+}
+let emp = new Employee(`chinmay`, 200000);
+emp.salary = -4000
+console.log(emp.salary);
