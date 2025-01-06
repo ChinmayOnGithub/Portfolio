@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
-import { User } from '../models/user.models';
-import { ApiError } from '../utils/ApiError';
-import { asyncHandler } from '../utils/asyncHandler';
+import { User } from '../models/user.models.js';
+import { ApiError } from '../utils/ApiError.js';
+import { asyncHandler } from '../utils/asyncHandler.js';
 
 
 // using this now every req made contains _id of the user. hence now we know who the user is.
@@ -39,4 +39,3 @@ export const verifyJWT = asyncHandler(async (req, _, next) => {
     next()
 })
 
-export { verifyJWT }

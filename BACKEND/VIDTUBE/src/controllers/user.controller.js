@@ -3,8 +3,9 @@ import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { User } from "../models/user.models.js";
 import { uploadOnCloudinary, deleteFromCloudinary } from "../utils/cloudinary.js";
-import { jwt } from 'jsonwebtoken';
-import { Subscription } from '../models/subscription.models';
+import jwt from 'jsonwebtoken';
+import { Subscription } from '../models/subscription.models.js';
+import mongooseAggregatePaginate from "mongoose-aggregate-paginate-v2";
 
 const generateAccessAndRefreshToken = async (userId) => {
     try {
@@ -84,6 +85,7 @@ const registerUser = asyncHandler(async (req, res) => {
         throw new ApiError(500, "Failed to upload coverImage");
     }
 
+
     // Now all data is taken from the user. Lets create user from data from the mongoose database.
     try {
         const user = await User.create({
@@ -128,9 +130,14 @@ const loginUser = asyncHandler(async (req, res) => {
     const { email, username, password } = req.body;
 
     // validation
-    if (!email) {
+    if (!email?.trim()) {
         throw new ApiError(400, "Email is required");
     }
+
+    if (!password?.trim()) {
+        throw new ApiError(400, "Password is required");
+    }
+
 
     // check for user
     const user = await User.findOne({
@@ -144,7 +151,7 @@ const loginUser = asyncHandler(async (req, res) => {
     // Validate password
     const isPasswordValid = await user.isPasswordCorrect(password)
     if (!isPasswordValid) {
-        throw new ApiError(404, "Password is incorrect / invalid");
+        throw new ApiError(401, "Password is incorrect / invalid");
     }
 
     const { accessToken, refreshToken } = await generateAccessAndRefreshToken(user._id)
@@ -202,7 +209,7 @@ const logoutUser = asyncHandler(async (req, res) => {
 })
 
 const refreshAccessToken = asyncHandler(async (req, res) => {
-    const incomingRefreshToken = req.cookies.accessToken || req.body.accessToken;
+    const incomingRefreshToken = req.cookies.refreshToken || req.body.refreshToken;  // changed accessToken to refreshToken
 
     if (!incomingRefreshToken) {
         throw new ApiError(401, "Refresh token is required");
@@ -257,10 +264,17 @@ const changeCurrentPassword = asyncHandler(async (req, res) => {
 
     const user = await User.findById(req.user?._id)
 
+    if (!user) {
+        return res.status(404).json(new ApiResponse(404, null, "User not found"));
+    }
+
+
     const isPasswordValid = await user.isPasswordCorrect(oldPassword);
 
     if (!isPasswordValid) {
-        throw new ApiError(401, "Old password is incorrect");
+        // throw new ApiError(401, "Old password is incorrect");
+        return res.status(401).json(new ApiResponse(401, null, "Old password is incorrect"));
+
     }
 
     user.password = newPassword;
@@ -268,9 +282,8 @@ const changeCurrentPassword = asyncHandler(async (req, res) => {
 
     return res
         .status(200)
-        .json(new ApiResponse(200, "Password changed successfully"))
+        .json(new ApiResponse(200, null, "Password changed successfully"))
 })
-
 
 const getCurrentUser = asyncHandler(async (req, res) => {
     return res
@@ -373,6 +386,7 @@ const getUserChannelProfile = asyncHandler(async (req, res) => {
         throw new ApiError(404, "Username is required");
     }
 
+    // channel as an array
     const channel = await User.aggregate(
         [
             {
@@ -395,17 +409,116 @@ const getUserChannelProfile = asyncHandler(async (req, res) => {
                     foreignField: "subscriber",
                     as: "subscribedTo"
                 }
+            },
+            {
+                $addFields: {
+                    subscribersCount: {
+                        $size: "$subscribers"
+                    },
+                    channelsSubscribedToCount: {
+                        $size: "$subscribedTo"
+                    },
+                    isSubscribed: {
+                        $cond: {
+                            if: { $in: [req.user?._id, "$subscribers.subscriber"] },
+                            then: true,
+                            else: false
+                        }
+                    }
+                }
+            },
+            {
+                // Project only the necessary data
+                $project: {
+                    fullname: 1,
+                    username: 1,
+                    avatar: 1,
+                    subscribersCount: 1,
+                    channelsSubscribedToCount: 1,
+                    isSubscribed: 1,
+                    coverImage: 1,
+                    email: 1,
+                }
             }
         ]
     )
 
+    console.log(channel); // console log
 
+    if (!channel?.length) {
+        throw new ApiError(404, "Channel not found")
+    }
+
+    return res
+        .status(200)
+        .json(new ApiResponse(200,
+            channel[0],
+            "Channel profile fetched successfully"
+        ))
 })
-const getWatchHistory = asyncHandler(async (req, res) => { })
+
+const getWatchHistory = asyncHandler(async (req, res) => {
+    const user = await User.aggregate([
+        {
+            $match: {
+                _id: new mongoose.Types.ObjectId(req.user?._id)
+            }
+        },
+        {
+            $lookup: {
+                from: "videos",
+                localField: "watchHistory",
+                foreignField: "_id",
+                as: "watchHistory",
+                pipeline: [
+                    {
+                        $lookup: {
+                            from: "users",
+                            localField: "owner",
+                            foreignField: "_id",
+                            as: "owner",
+                            pipeline: [
+                                {
+                                    $project: {
+                                        fullname: 1,
+                                        username: 1,
+                                        avatar: 1
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        $addFields: {
+                            owner: {
+                                $first: "$owner"
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    ])
+
+    return res
+        .status(200)
+        .json(new ApiResponse(
+            200,
+            user[0]?.watchHistory,
+            "Watch history fetched successfully"
+        ))
+})
 
 export {
     registerUser,
     loginUser,
     logoutUser,
-    refreshAccessToken
+    refreshAccessToken,
+    changeCurrentPassword,
+    getCurrentUser,
+    updateAccountDetails,
+    updateUserAvatar,
+    updateUserCoverImage,
+    getUserChannelProfile,
+    getWatchHistory
 }
