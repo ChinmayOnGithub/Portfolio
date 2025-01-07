@@ -6,6 +6,10 @@ import { uploadOnCloudinary, deleteFromCloudinary } from "../utils/cloudinary.js
 import jwt from 'jsonwebtoken';
 import { Subscription } from '../models/subscription.models.js';
 import mongooseAggregatePaginate from "mongoose-aggregate-paginate-v2";
+import multer from "multer";
+import { upload } from '../middlewares/multer.middleware.js';
+import mongoose from "mongoose";
+
 
 const generateAccessAndRefreshToken = async (userId) => {
     try {
@@ -322,11 +326,17 @@ const updateAccountDetails = asyncHandler(async (req, res) => {
 
 
 const updateUserAvatar = asyncHandler(async (req, res) => {
+    console.log("req.file: ", req.file);
+    // console.log("req.body: ", req.body);
 
-    const avatarLocalPath = req.files?.path;
-
-    if (!avatarLocalPath) {
+    if (!req.file || !req.file.path) {
         throw new ApiError(404, "File is required");
+    }
+
+    const avatarLocalPath = req.file.path;
+
+    if (!avatarLocalPath.trim()) {
+        throw new ApiError(404, "File-path is required");
     }
 
     const avatar = await uploadOnCloudinary(avatarLocalPath);
@@ -353,7 +363,7 @@ const updateUserAvatar = asyncHandler(async (req, res) => {
 
 
 const updateUserCoverImage = asyncHandler(async (req, res) => {
-    const coverImageLocalPath = req.files?.path;
+    const coverImageLocalPath = req.file?.path;
 
     if (!coverImageLocalPath) {
         throw new ApiError(400, "File is required");
@@ -372,7 +382,7 @@ const updateUserCoverImage = asyncHandler(async (req, res) => {
             }
         },
         { new: true }
-    ).select("-password refreshToken")
+    ).select("-password -refreshToken")
 
     return res
         .status(200)
@@ -500,6 +510,9 @@ const getWatchHistory = asyncHandler(async (req, res) => {
         }
     ])
 
+    console.log(user);
+
+
     return res
         .status(200)
         .json(new ApiResponse(
@@ -507,7 +520,7 @@ const getWatchHistory = asyncHandler(async (req, res) => {
             user[0]?.watchHistory,
             "Watch history fetched successfully"
         ))
-})
+});
 
 export {
     registerUser,
