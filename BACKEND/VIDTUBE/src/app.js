@@ -26,14 +26,18 @@ app.use(express.static("public"));
 // import routes
 import healthcheckRouter from "../src/routes/healthcheck.routes.js";
 import userRouter from "../src/routes/user.routes.js";
+import videoRouter from "../src/routes/video.routes.js"
 
 // routes
 app.use("/api/v1/healthcheck", healthcheckRouter);
 app.use("/api/v1/users", userRouter);
+app.use("/api/v1/video", videoRouter);
 
 
 
 // good practice to have control over the errors. (Optional) This error.middleware.js file changes rarely.
 import { errorHandler } from "./middlewares/error.middleware.js";
 app.use(errorHandler);
+
+
 export { app }
