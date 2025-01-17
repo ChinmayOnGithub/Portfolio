@@ -33,7 +33,7 @@ const videoSchema = new Schema({
         type: String,
         required: true,
     },
-    Duration: {
+    duration: {
         type: Number,
         required: true,
     },
@@ -47,9 +47,10 @@ const videoSchema = new Schema({
     },
     owner: {
         type: Schema.Types.ObjectId,
-        ref: "User"
+        ref: "User",
+        required: true,
     },
-}, { timestamps: true })
+}, { timestamps: true });
 
 videoSchema.plugin(mongooseAggregatePaginate)
 
