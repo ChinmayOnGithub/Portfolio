@@ -9,7 +9,7 @@
 
 import mongoose, { Schema } from "mongoose";
 
-const likeSchema = new Schema(
+const tweetSchema = new Schema(
     {
         content: {
             type: String,
@@ -23,4 +23,4 @@ const likeSchema = new Schema(
     { timestamps: true } // createdAt and updatedAt is added here
 )
 
-export const Like = mongoose.model("Like", likeSchema);
+export const Tweet = mongoose.model("Tweet", tweetSchema);

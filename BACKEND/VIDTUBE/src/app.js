@@ -26,12 +26,16 @@ app.use(express.static("public"));
 // import routes
 import healthcheckRouter from "../src/routes/healthcheck.routes.js";
 import userRouter from "../src/routes/user.routes.js";
-import videoRouter from "../src/routes/video.routes.js"
+import videoRouter from "../src/routes/video.routes.js";
+import likeRouter from "../src/routes/like.routes.js";
+import tweetRouter from "../src/routes/tweet.routes.js";
 
 // routes
 app.use("/api/v1/healthcheck", healthcheckRouter);
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/video", videoRouter);
+app.use("/api/v1/like", likeRouter);
+app.use("/api/v1/tweet", tweetRouter);
 
 
 
