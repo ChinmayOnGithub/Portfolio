@@ -54,10 +54,8 @@ const uploadOnCloudinary = async (localFilePath) => {
 const deleteFromCloudinary = async (identifier) => {
     try {
 
-
         // Normally i get the full url and not only public_id
         // so i need to split the url to get the public_id
-
 
         // Extract publicId if the identifier is a full URL
         let publicId = identifier;
@@ -67,19 +65,27 @@ const deleteFromCloudinary = async (identifier) => {
             publicId = publicIdWithExtension.split(".")[0]; // Remove the file extension
         }
 
+        // File could be at any location
 
         console.log("attempting to delete the image: ", publicId);
+        // Attempt to delete from videos folder
+        const resultVideo = await cloudinary.uploader.destroy(`videos/${publicId}`, { resource_type: "video" });
+        console.log("Deleted from cloudinary videos. publicId: ", publicId);
 
-        const result = await cloudinary.uploader.destroy(publicId);
-        console.log("Deleted from cloudinary. publicId: ", publicId);
-        return result
+        // Attempt to delete from thumbnails folder
+        const resultThumbnail = await cloudinary.uploader.destroy(`thumbnail/${publicId}`);
+        console.log("Deleted from cloudinary thumbnails. publicId: ", publicId);
+
+        // Attempt to delete from root folder
+        const resultRoot = await cloudinary.uploader.destroy(publicId);
+        console.log("Deleted from cloudinary root. publicId: ", publicId);
+
+        return { resultThumbnail, resultVideo, resultRoot };
 
     } catch (error) {
         console.log("Error deleting from cloudinary", error);
         return null;
     }
 }
-
-
 
 export { uploadOnCloudinary, deleteFromCloudinary }
