@@ -2,6 +2,7 @@ import { Router } from "express";
 import { verifyJWT } from '../middlewares/auth.middleware.js';
 import {
     getAllVideos,
+    getVideoById,
     publishAVideo,
 } from "../controllers/video.controller.js"
 import { upload } from "../middlewares/multer.middleware.js";
@@ -26,6 +27,7 @@ router.route("/publish").post(
 
 // routes accessed by anyone
 router.route("/get-video").get(getAllVideos);
+router.route("/get-video-by-id/:videoId").get(getVideoById)
 
 
 

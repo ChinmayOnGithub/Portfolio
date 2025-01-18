@@ -3,10 +3,12 @@ import { User } from '../models/user.models.js';
 import { ApiError } from "../utils/ApiError.js"
 import { ApiResponse } from "../utils/ApiResponse.js"
 import { asyncHandler } from "../utils/asyncHandler.js"
+import { mongoose } from 'mongoose';
 import {
     uploadOnCloudinary,
     deleteFromCloudinary
 } from "../utils/cloudinary.js"
+
 
 
 const getAllVideos = asyncHandler(async (req, res) => {
@@ -125,9 +127,30 @@ const publishAVideo = asyncHandler(async (req, res) => {
 })
 
 const getVideoById = asyncHandler(async (req, res) => {
-    const { videoId } = req.params
-    //TODO: get video by id
-})
+    const { videoId } = req.params; // params are taken from the :videoId from url itself
+    // Validate videoId
+    if (!videoId || !mongoose.Types.ObjectId.isValid(videoId)) {
+        console.log("Invalid videoId");
+        return res.status(400).json(new ApiError(400, "Valid Video ID is required"));
+    }
+    // Find video by id
+    try {
+        const video = await Video.findById(videoId);
+
+        if (!video) {
+            console.log("Video not found");
+            return res.status(404).json(new ApiError(404, "Video not found"));
+        }
+        return res
+            .status(200)
+            .json(new ApiResponse(200, "Fetched video by ID successfully", video));
+    } catch (error) {
+        console.log("Error while finding the video", error);
+        return res
+            .status(500)
+            .json(new ApiError(500, "Error while finding the video", error));
+    }
+});
 
 const updateVideo = asyncHandler(async (req, res) => {
     const { videoId } = req.params
