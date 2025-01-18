@@ -7,8 +7,6 @@ import { asyncHandler } from "../utils/asyncHandler.js"
 
 const createTweet = asyncHandler(async (req, res) => {
   //TODO: create tweet
-  console.log("start");
-
   const user = await User.findById(req.user);
   if (!user) {
     return res.status(404).json(new ApiError(404, "User not found | please login to create your own tweet"));
@@ -35,9 +33,8 @@ const getUserTweets = asyncHandler(async (req, res) => {
   // TODO: get user tweets
   const { userId } = req.params
 
-  // user = await User.findById(req.user?._id);
-  if (!userId) {
-    return res.status(404).json(new ApiError(404, "User not found"))
+  if (!userId || !isValidObjectId(userId)) {
+    return res.status(400).json(new ApiError(400, "Invalid user ID"))
   }
 
   try {
@@ -83,12 +80,66 @@ const getUserTweets = asyncHandler(async (req, res) => {
 });
 
 const updateTweet = asyncHandler(async (req, res) => {
-  //TODO: update tweet
-})
+  const { tweetId } = req.params;
+  const { content } = req.body;
+
+  if (!tweetId || !isValidObjectId(tweetId)) {
+    return res.status(400).json(new ApiError(400, "Invalid tweet ID"));
+  }
+
+  if (!content || !content.trim()) {
+    return res.status(400).json(new ApiError(400, "Content is required"));
+  }
+
+  try {
+    const tweet = await Tweet.findOneAndUpdate(
+      { _id: tweetId, owner: req.user._id },
+      { content },
+      { new: true, runValidators: true }
+    );
+
+    if (!tweet) {
+      return res.status(404).json(new ApiError(404, "Tweet not found or you are not authorized to update this tweet"));
+    }
+
+    return res.status(200).json(new ApiResponse(200, "Updated Tweet successfully", tweet));
+  } catch (error) {
+    return res.status(500).json(new ApiError(500, "Something went wrong while updating the tweet", error));
+  }
+});
 
 const deleteTweet = asyncHandler(async (req, res) => {
+  console.log("start");
+
   //TODO: delete tweet
-})
+  const { tweetId } = req.params
+
+  if (!tweetId || !isValidObjectId(tweetId)) {
+    return res
+      .status(400)
+      .json(new ApiError(400, "Invalid tweet ID"));
+  }
+
+  try {
+    const tweet = await Tweet.findByIdAndDelete(
+      { _id: tweetId, owner: req.user._id }
+    )
+
+    if (!tweet) {
+      return res
+        .status(404)
+        .json(new ApiError(404, "Tweet you searched for is not found or You are not authorised to delete this tweet"))
+    }
+
+    return res
+      .status(200)
+      .json(new ApiResponse(200, "Successfully deleted the Tweet", tweet));
+  } catch (error) {
+    return res
+      .status(500)
+      .json(new ApiError(500, "Something went wrong while deleting the tweet", error))
+  }
+});
 
 export {
   createTweet,
