@@ -4,6 +4,7 @@ import {
     getAllVideos,
     getVideoById,
     publishAVideo,
+    updateVideo,
 } from "../controllers/video.controller.js"
 import { upload } from "../middlewares/multer.middleware.js";
 
@@ -23,6 +24,16 @@ router.route("/publish").post(
         },
     ]),
     publishAVideo);
+router.route("/update-video/:videoId").patch(
+    verifyJWT,
+    upload.fields([
+        {
+            name: "thumbnail",
+            maxCount: 1
+        }
+    ]),
+    updateVideo
+)
 
 
 // routes accessed by anyone

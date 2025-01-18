@@ -155,6 +155,63 @@ const getVideoById = asyncHandler(async (req, res) => {
 const updateVideo = asyncHandler(async (req, res) => {
     const { videoId } = req.params
     //TODO: update video details like title, description, thumbnail
+    if (!videoId || !mongoose.Types.ObjectId.isValid(videoId)) {
+        console.log("Invalid videoId");
+        return res.status(400).json(new ApiError(400, "Valid Video ID is required"));
+    }
+
+    const { title, description } = req.body;
+
+    // optionally update whatever is provided
+    const updateFields = {};
+    if (title) updateFields.title = title;
+    if (description) updateFields.description = description;
+
+
+
+    // now update the thumbnail (optionally)
+    const thumbnailLocalPath = req.files?.thumbnail?.[0]?.path;
+
+    let thumbnail;
+    if (thumbnailLocalPath) {
+        try {
+            // Find the existing video to get the current thumbnail public_id
+            const existingVideo = await Video.findById(videoId);
+            if (existingVideo && existingVideo.thumbnail) {
+                // Delete the old thumbnail from Cloudinary
+                await deleteFromCloudinary(existingVideo.thumbnail);
+            }
+
+            // Upload the new thumbnail to Cloudinary
+            thumbnail = await uploadOnCloudinary(thumbnailLocalPath);
+        } catch (error) {
+            return res.status(500).json(new ApiError(500, "Error while uploading the thumbnail!"));
+        }
+    }
+
+    if (thumbnail) updateFields.thumbnail = thumbnail.url;
+
+    // update all the fields
+    try {
+        const video = await Video.findByIdAndUpdate(
+            videoId,
+            {
+                $set: updateFields
+            },
+            {
+                new: true
+            }
+        );
+
+        return res
+            .status(200)
+            .json(new ApiResponse(200, "Updated video details successfully", video))
+    } catch (error) {
+        console.log("couldnt update the details");
+
+        return res.status(500).json(new ApiError(404, "Error while updating the video details"))
+    }
+
 
 })
 

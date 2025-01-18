@@ -27,6 +27,8 @@ export const verifyJWT = asyncHandler(async (req, _, next) => {
         // we can also set some information
         // This is all happening inside the middleware and yet to reach the server.
         req.user = user;
+        console.log("User verified successfully");
+
         // req.user is additional information now
 
         // to transfer the flow control just say next()
