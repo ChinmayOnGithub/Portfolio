@@ -6,12 +6,30 @@ import { asyncHandler } from "../utils/asyncHandler.js"
 
 const getVideoComments = asyncHandler(async (req, res) => {
   //TODO: get all comments for a video
-  const { videoId } = req.params
-  const { page = 1, limit = 10 } = req.query
+  const { videoId } = req.params;
+  const { page = 1, limit = 10 } = req.query;
 
+  if (!videoId || !isValidObjectId(videoId)) {
+    return res.status(400).json(new ApiError(400, "Video id is not valid"));
+  }
 
+  try {
+    const comments = await Comment.find({ video: videoId })
+      .skip((page - 1) * limit)
+      .limit(parseInt(limit))
+      .exec();
 
-})
+    const totalComments = await Comment.countDocuments({ video: videoId });
+
+    return res.status(200).json(new ApiResponse(200, "Fetched comments successfully", {
+      comments,
+      totalPages: Math.ceil(totalComments / limit),
+      currentPage: page
+    }));
+  } catch (error) {
+    return res.status(500).json(new ApiError(500, "Something went wrong while fetching comments", error));
+  }
+});
 
 const addComment = asyncHandler(async (req, res) => {
   // TODO: add a comment to a video

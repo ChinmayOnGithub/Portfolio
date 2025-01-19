@@ -1,5 +1,8 @@
 import { Router } from 'express';
-import { addComment } from "../controllers/comment.controller.js";
+import {
+  addComment,
+  getVideoComments
+} from "../controllers/comment.controller.js";
 import { verifyJWT } from '../middlewares/auth.middleware.js';
 
 
@@ -12,7 +15,7 @@ router.route("/add-comment/:videoId").post(verifyJWT, addComment)
 
 
 // not secure routes
-// router.route("/get-video-comments").get(getVideoComments)
+router.route("/get-video-comments/:videoId").get(getVideoComments)
 
 
 
