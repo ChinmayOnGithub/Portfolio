@@ -43,11 +43,12 @@ const getAllVideos = asyncHandler(async (req, res) => {
         ];
     }
 
+    // using pagination while getting data from database
     const videos = await Video
         .find(filter)
         .sort({ [sortBy]: sortType === 'desc' ? -1 : 1 })
-        .skip((page - 1) * limit)
-        .limit(limit);
+        .skip((page - 1) * limit) // skip prev pages
+        .limit(limit); // limits number of documents in one page
 
     res
         .status(200)

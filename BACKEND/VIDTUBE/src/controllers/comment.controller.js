@@ -7,7 +7,7 @@ import { asyncHandler } from "../utils/asyncHandler.js"
 const getVideoComments = asyncHandler(async (req, res) => {
   //TODO: get all comments for a video
   const { videoId } = req.params;
-  const { page = 1, limit = 10 } = req.query;
+  const { page = 1, limit = 10 } = req.query; // used for pagination. Only limited numbers of comments will be loaded
 
   if (!videoId || !isValidObjectId(videoId)) {
     return res.status(400).json(new ApiError(400, "Video id is not valid"));
@@ -15,8 +15,8 @@ const getVideoComments = asyncHandler(async (req, res) => {
 
   try {
     const comments = await Comment.find({ video: videoId })
-      .skip((page - 1) * limit)
-      .limit(parseInt(limit))
+      .skip((page - 1) * limit) // skip the comments from prev page
+      .limit(parseInt(limit)) // limit number of comments (documents) on a single page
       .exec();
 
     const totalComments = await Comment.countDocuments({ video: videoId });
