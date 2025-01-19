@@ -17,7 +17,6 @@ router.route("/update-comment/:videoId/:commentId").patch(verifyJWT, updateComme
 router.route("/delete-comment/:videoId/:commentId").delete(verifyJWT, deleteComment)
 
 
-
 // not secure routes
 router.route("/get-video-comments/:videoId").get(getVideoComments)
 
